@@ -7,7 +7,7 @@ from typing import List
 
 
 def filter_datum(fields: List[str], redaction: str, message: str,
-                 seperator: str):
+                 seperator: str) -> str:
     """filters datum with regex"""
     for field in fields:
         pattern = field + "=.*?" + seperator
