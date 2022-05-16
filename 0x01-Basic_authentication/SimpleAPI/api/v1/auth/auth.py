@@ -26,8 +26,8 @@ class Auth:
         """Returns the valuye of Authorization in the header if any"""
         if request is None:
             return None
-        if not 'Authorization' in request.keys():
-            return None
+        # if 'Authorization' not in request.keys():
+        #     return None
         return request.get("Authorization")
 
     def current_user(self, request=None) -> TypeVar('User'):
