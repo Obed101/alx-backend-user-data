@@ -28,10 +28,11 @@ def stats() -> str:
 
 @app_views.route('/unauthorized/', strict_slashes=False)
 def unauthorized():
-  """Returns a 401 error"""
-  abort(401)
+    """Returns a 401 error"""
+    abort(401)
+
 
 @app_views.route('/forbidden/', strict_slashes=False)
 def forbidden():
-  """Returns a 403 error"""
-  abort(403)
+    """Returns a 403 error"""
+    abort(403)
