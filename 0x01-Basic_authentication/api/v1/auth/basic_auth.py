@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Contains Basic authentication
+Basic authentication module
 """
 
 from auth import Auth
@@ -11,7 +11,9 @@ class BasicAuth(Auth):
 
     def extract_base64_authorization_header(self,
                                             authorization_header: str) -> str:
-        """extracts base64 authorization header"""
+        """
+        extracts base64 authorization header
+        """
         if not authorization_header or type(authorization_header) is not str:
             return None
         if type(authorization_header) == str:
