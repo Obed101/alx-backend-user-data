@@ -10,6 +10,7 @@ class Auth:
     """Basic Authentication class"""
 
     def __init__(self) -> None:
+        """Instance of Auth Class"""
         pass
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
@@ -36,6 +37,7 @@ class Auth:
         return None
 
     # (not required) Function for validating url with slashes
+
     def add_slash(self, urls: List[str]) -> List[str]:
         """adds slash / to the url if it doesn't have"""
         if type(urls) is not List[str]:
