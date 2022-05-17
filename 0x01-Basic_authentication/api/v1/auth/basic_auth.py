@@ -9,10 +9,6 @@ from auth import Auth
 class BasicAuth(Auth):
     """Basic Authentication only class"""
 
-    def __init__(self) -> None:
-        """Instance of BasicAuth"""
-        super().__init__()
-
     def extract_base64_authorization_header(self,
                                             authorization_header: str) -> str:
         """extracts base64 authorization header"""
