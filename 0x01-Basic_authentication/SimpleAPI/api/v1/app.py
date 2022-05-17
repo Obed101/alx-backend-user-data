@@ -16,8 +16,8 @@ auth = None
 auth = getenv("AUTH_TYPE")
 
 if auth:
-    from api.v1.auth import Auth
-    auth = Auth()
+    from api.v1.auth.auth import Auth
+    auth = Auth
 
 
 @app.errorhandler(404)
@@ -37,6 +37,17 @@ def unauthorized(error):
 def forbidden(error):
     """Returns custom 403 error"""
     return jsonify({"error": "Forbidden"}), 403
+
+
+@app.before_request
+def check_args():
+    """Checks the url to see what to return"""
+    paths = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
+    if auth is not None and not auth.require_auth(request.path, paths):
+        if not auth.authorization_header(request):
+            abort(401)
+        if not auth.current_user(request):
+            abort(403)
 
 
 if __name__ == "__main__":
