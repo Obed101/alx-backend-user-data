@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Contains Basic authentication class"""
 
+from os import getenv
 from typing import List, TypeVar
 from flask import request
 from requests import Request
@@ -46,3 +47,10 @@ class Auth:
             if not path.endswith("/"):
                 urls[i] = path + "/"
         return urls
+
+    def session_cookie(self, request=None):
+        """Returns a cookie value from a request"""
+        if not request:
+            return None
+        _my_session_id =  request.cookies.get(getenv('SESSION_NAME'))
+        return _my_session_id
