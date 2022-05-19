@@ -5,7 +5,7 @@ Module for Basic authentication
 
 import base64
 from tkinter import N
-from typing import Tuple
+from typing import Tuple, TypeVar
 from auth import Auth
 
 
@@ -41,7 +41,7 @@ class BasicAuth(Auth):
             return None
 
     def extract_user_credentials(
-        self, decoded_base64_authorization_header: str) -> Tuple[str, str]:
+            self, decoded_base64_authorization_header: str) -> Tuple[str, str]:
         """Returns The username and email from decoded str"""
         if not decoded_base64_authorization_header or type(
                 decoded_base64_authorization_header) is not str:
@@ -50,3 +50,11 @@ class BasicAuth(Auth):
             return None, None
         splitted = decoded_base64_authorization_header.split(':')
         return (splitted[0], splitted[1])
+
+    def user_object_from_credentials(
+            self, user_email: str, user_pwd: str) -> TypeVar('User'):
+        """Returns user instance if the email and psswd are fine"""
+        if not user_email or not user_pwd or type(
+                user_email) is not str or type(user_pwd) is not str:
+            return None
+        
