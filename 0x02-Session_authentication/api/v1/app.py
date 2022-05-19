@@ -46,13 +46,18 @@ def forbidden(error):
 @app.before_request
 def check_args():
     """Checks the url to see what to return"""
-    paths = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
+    paths = ['/api/v1/status/', '/api/v1/unauthorized/',
+             '/api/v1/forbidden/', '/api/v1/auth_session/login/']
     if auth is not None and auth.require_auth(request.path, paths):
         if not auth.authorization_header(request):
             abort(401)
         if not auth.current_user(request):
             abort(403)
+        if not auth.authorization_header(request) and not auth.session_cookie(
+                request):
+            abort(401)
         request.current_user = auth.current_user(request)
+
 
 if __name__ == "__main__":
     host = getenv("API_HOST", "0.0.0.0")
