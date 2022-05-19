@@ -7,7 +7,7 @@ import uuid
 import base64
 from typing import Tuple, TypeVar
 from auth import Auth
-from models.user import User
+from .models.user import User
 
 
 class BasicAuth(Auth):
