@@ -3,10 +3,11 @@
 Module for Basic authentication
 """
 
+import uuid
 import base64
-from tkinter import N
 from typing import Tuple, TypeVar
 from auth import Auth
+from models.user import User
 
 
 class BasicAuth(Auth):
@@ -36,7 +37,8 @@ class BasicAuth(Auth):
                 base64_authorization_header) is not str:
             return None
         try:
-            return base64.b64decode(base64_authorization_header).decode('utf-8')
+            _header = base64_authorization_header
+            return base64.b64decode(_header).decode('utf-8')
         except Exception:
             return None
 
@@ -57,4 +59,9 @@ class BasicAuth(Auth):
         if not user_email or not user_pwd or type(
                 user_email) is not str or type(user_pwd) is not str:
             return None
-        
+        try:
+            users = User.search({'email': user_email})
+        except Exception:
+            return None
+        for user in users:
+            return user if User.is_valid_password(user_pwd) else None
