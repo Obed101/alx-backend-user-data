@@ -3,6 +3,7 @@
 Module for Basic authentication
 """
 
+import base64
 from auth import Auth
 
 
@@ -25,3 +26,14 @@ class BasicAuth(Auth):
             except Exception:
                 return None
         return None
+
+    def decode_base64_authorization_header(
+            self, base64_authorization_header: str) -> str:
+        """Decodes base64_authorization_header"""
+        if not base64_authorization_header or type(
+                base64_authorization_header) is not str:
+            return None
+        try:
+            return base64.b64decode(base64_authorization_header).decode('utf-8')
+        except Exception:
+            return None
