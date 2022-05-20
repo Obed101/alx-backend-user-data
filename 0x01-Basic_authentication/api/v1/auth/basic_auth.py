@@ -6,7 +6,7 @@ Module for Basic authentication
 import uuid
 import base64
 from typing import Tuple, TypeVar
-from auth import Auth
+from api.v1.auth.auth import Auth
 from models.user import User
 
 
@@ -64,7 +64,7 @@ class BasicAuth(Auth):
         except Exception:
             return None
         for user in users:
-            return user if User.is_valid_password(user_pwd) else None
+            return user if User.is_valid_password(user, user_pwd) else None
 
     def current_user(self, request=None) -> TypeVar('User'):
         """Gets the whole user instance"""
