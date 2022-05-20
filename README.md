@@ -2,7 +2,9 @@
 Manipulating and controlling user data using Python
 
 # TOPICS
-- Personal Data Manipulation and Some Rules, etc.
+- Personal Data Manipulation
+- Basic Authentication
+- Session Authentication
 - More in the folders  
 
-Don't forget to STAR this repo if you like the content :star:
+Don't forget to STAR :star: this repo if you like the content 
