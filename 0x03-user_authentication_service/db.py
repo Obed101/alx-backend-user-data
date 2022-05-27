@@ -36,3 +36,10 @@ class DB:
         self._session.add(new_user)
         self._session.commit()
         return new_user
+
+my_db = DB()
+user_1 = my_db.add_user("test@test.com", "SuperHashedPwd")
+print("one===", user_1.id)
+
+user_2 = my_db.add_user("test1@test.com", "SuperHashedPwd1")
+print("two====", user_2.id)
