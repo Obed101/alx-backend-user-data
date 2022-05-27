@@ -65,22 +65,25 @@ def get_db() -> connection.MySQLConnection:
         user=username, password=password, host=host, database=database)
 
 
+def main():
+    """ Uses get_db to display users table """
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute('SELECT * FROM users;')
+
+    rows = cursor.fetchall()
+    logger = get_logger()
+
+    for row in rows:
+        query = 'name={}; email={}; phone={}; ssn={}; password={}; ip={}; '\
+            'last_login={}; user_agent={};'.format(row[0], row[1], row[2],
+                                                   row[3], row[4], row[5],
+                                                   row[6], row[7])
+        logger.info(query)
+    cursor.close()
+    conn.close()
+
+
 if __name__ == '__main__':
-    def main():
-        """ Uses get_db to display users table """
-        conn = get_db()
-        cursor = conn.cursor()
-
-        cursor.execute('SELECT * FROM users;')
-        
-        rows = cursor.fetchall()
-        logger = get_logger()
-
-        for row in rows:
-            query = 'name={}; email={}; phone={}; ssn={}; password={}; ip={}; '\
-                'last_login={}; user_agent={};'.format(row[0], row[1], row[2], row[3],
-                               row[4], row[5], row[6], row[7])
-            logger.info(query)
-        cursor.close()
-        conn.close()
     main()
