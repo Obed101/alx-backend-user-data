@@ -63,3 +63,12 @@ def get_db() -> connection.MySQLConnection:
     return connection.MySQLConnection(user=username, password=password,
                                            host=host, database=database)
 
+
+
+db = get_db()
+cursor = db.cursor()
+cursor.execute("SELECT COUNT(*) FROM users;")
+for row in cursor:
+    print(row[0])
+cursor.close()
+db.close()
