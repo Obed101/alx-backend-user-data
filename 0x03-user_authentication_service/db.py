@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """DB module
 """
-from tkinter import N
 from sqlalchemy import create_engine, insert
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -34,11 +33,6 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """Adds a new user"""
         new_user = User(email=email, hashed_password=hashed_password)
+        self._session.add(new_user)
+        self._session.commit()
         return new_user
-
-
-user_1 = my_db.add_user("test@test.com", "SuperHashedPwd")
-print(user_1.id)
-
-user_2 = my_db.add_user("test1@test.com", "SuperHashedPwd1")
-print(user_2.id)
