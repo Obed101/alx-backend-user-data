@@ -7,7 +7,7 @@ from os import environ
 import re
 from typing import List
 
-PII_FIELDS = ('database', 'email', 'phone', 'password', 'ssn')
+PII_FIELDS = ('name', 'email', 'phone', 'password', 'ssn')
 
 
 def filter_datum(fields: List[str], redaction: str, message: str,
