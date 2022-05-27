@@ -25,7 +25,8 @@ class RedactingFormatter(logging.Formatter):
     """
 
     REDACTION = "***"
-    FORMAT = "[HOLBERTON] %(database)s %(levelname)s %(asctime)-15s: %(message)s"
+    FORMAT = "[HOLBERTON] %(database)s %(levelname)s %(asctime)-15s: \
+        %(message)s"
     SEPARATOR = ";"
 
     def __init__(self, fields: List[str]):
@@ -60,5 +61,5 @@ def get_db() -> connection.MySQLConnection:
     username = environ.get("PERSONAL_DATA_DB_USERNAME", "root")
     password = environ.get("PERSONAL_DATA_DB_PASSWORD", "")
 
-    return connection.MySQLConnection(user=username, password=password,
-                                           host=host, database=database)
+    return connection.MySQLConnection(
+        user=username, password=password, host=host, database=database)
