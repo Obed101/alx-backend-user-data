@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """DB module
 """
-from sqlalchemy import create_engine, insert
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import create_engine
+from sqlalchemy.exc import InvalidRequestError, NoResultFound
+# from sqlalchemy.orm.exc import NoresultFound
+# from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 
@@ -37,9 +39,13 @@ class DB:
         self._session.commit()
         return new_user
 
-my_db = DB()
-user_1 = my_db.add_user("test@test.com", "SuperHashedPwd")
-print("one===", user_1.id)
+    def find_user_by(self, **kwargs):
+        """Finds a user"""
+        try:
+            user = self.__session.query(User).filter_by(**kwargs).first()
+        except TypeError:
+            raise InvalidRequestError
+        if not user:
+            raise NoResultFound
 
-user_2 = my_db.add_user("test1@test.com", "SuperHashedPwd1")
-print("two====", user_2.id)
+        return user
