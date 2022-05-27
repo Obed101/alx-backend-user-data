@@ -2,7 +2,7 @@
 """ This module filters user data """
 
 import logging
-from multiprocessing import connection
+from mysql.connector import connection
 from os import environ
 import re
 from typing import List
