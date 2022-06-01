@@ -5,6 +5,7 @@ import requests
 
 url = 'http://0.0.0.0:5000'
 
+
 def register_user(email: str, password: str) -> None:
     """test register method"""
     credencials = {"email": email, "password": password}
