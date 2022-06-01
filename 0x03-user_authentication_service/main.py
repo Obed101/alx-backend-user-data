@@ -12,6 +12,7 @@ def register_user(email: str, password: str) -> None:
     response = requests.post(f'{url}/users', data=credencials)
     assert response.status_code == 200, "Test fail"
 
+
 EMAIL = "guillaume@holberton.io"
 PASSWD = "b4l0u"
 NEW_PASSWD = "t4rt1fl3tt3"
