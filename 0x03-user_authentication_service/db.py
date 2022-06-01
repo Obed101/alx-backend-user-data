@@ -42,7 +42,7 @@ class DB:
     def find_user_by(self, **kwargs):
         """Finds a user"""
         try:
-            user = self.__session.query(User).filter_by(**kwargs).first()
+            user = self._session.query(User).filter_by(**kwargs).first()
         except TypeError:
             raise InvalidRequestError
         if not user:
@@ -59,4 +59,4 @@ class DB:
                 setattr(user, key, value)
             else:
                 raise ValueError
-        self.__session.commit()
+        self._session.commit()
